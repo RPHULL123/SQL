@@ -1,0 +1,63 @@
+--Create a grocery store database
+
+CREATE TABLE dreams_clothing (id integer PRIMARY KEY, item text, location text, sex text, cost_price_unit£ integer, purchase_quantity integer, cost_total£ integer, quantity_sold integer, sale_price£ integer, total_sales£ integer);
+
+INSERT INTO dreams_clothing VALUES 
+(1, 'tshirt', 'london', 'male', 2, 20, 40, 20, 4, 80),
+(2, 'tshirt', 'london', 'female', 1, 20, 20, 18, 2, 36),
+(3, 'tshirt', 'Kent', 'male', 2, 20, 40, 15, 4, 60),
+(4, 'tshirt', 'kent', 'female', 1, 20, 20, 20, 2, 40),
+(5, 'jacket', 'london', 'male', 4, 20, 80, 11, 10, 110),
+(6, 'jacket', 'london', 'female', 5, 20, 100, 16, 12, 192),
+(7, 'jacket', 'kent', 'male', 4, 20, 80, 14, 10, 140),
+(8, 'jacket', 'kent', 'female', 5, 20, 100, 5, 12, 60),
+(9, 'jeans', 'london', 'male', 6, 20, 120, 19, 11, 209),
+(10, 'jeans', 'london', 'female', 5, 20, 100, 20, 15, 300),
+(11, 'jeans', 'kent', 'male', 6, 20, 120, 11, 11, 121),
+(12, 'jeans', 'kent', 'female', 5, 20, 100, 15, 15, 225),
+(13, 'shoes', 'london', 'male', 13, 20, 260, 8, 36, 288),
+(14, 'shoes', 'london', 'female', 15, 20, 300, 13, 50, 650),
+(15, 'shoes', 'kent', 'male', 13, 20, 260, 14, 36, 504),
+(16, 'shoes', 'kent', 'female', 15, 20, 300, 18, 50, 900),
+(17, 'hats', 'london', 'male', 3, 20, 60, 3, 6, 18),
+(18, 'hats', 'london', 'female', 4, 20, 80, 4, 8, 32),
+(19, 'hats', 'kent', 'male', 3, 20, 60, 16, 6, 96),
+(20, 'hats', 'kent', 'female', 4, 20, 80, 1, 8, 8);
+
+--display the database and order by sale_price£
+SELECT * FROM dreams_clothing ORDER BY sale_price£;
+
+--what is the gross profit for male clothing sales in the london store?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Gross_Profit_Male_London_£ FROM dreams_clothing 
+WHERE (sex = 'male') AND (location = 'london');
+
+--what is the gross profit for female clothing sales in the london store?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Gross_Profit_Female_London_£ FROM dreams_clothing
+WHERE (sex = 'female') AND (location = 'london');
+
+--what is the gross profit for male clothing sales in the kent store?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Gross_Profit_Male_Kent_£ FROM dreams_clothing 
+WHERE (sex = 'male') AND (location = 'kent');
+
+--what is the gross profit for female clothing sales in the kent store?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Gross_Profit_Female_Kent_£ FROM dreams_clothing
+WHERE (sex = 'female') AND (location = 'kent');
+
+--what is the gross profit for male clothing sales in all stores?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Total_Male_Profit_All_Stores_£
+FROM dreams_clothing
+WHERE (sex = 'male');
+
+--what is the gross profit for female clothing sales in all stores?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Total_Female_Profit_All_Stores_£
+FROM dreams_clothing
+WHERE (sex = 'female');
+
+--what is the total gross profit across all stores?
+SELECT SUM(total_sales£) - SUM(cost_total£) AS Total_Gross_Profit_All_Stores_£
+FROM dreams_clothing
+
+
+
+
+
