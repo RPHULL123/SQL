@@ -1,0 +1,94 @@
+--In 2009 what payment type was used to purchase, on average, higher priced sales? 
+SELECT AVG(price) AS Avg_Visa_Sales FROM SALES 
+WHERE payment_type='Visa'
+AND country='United states'
+AND account_created LIKE '%09%';
+
+SELECT AVG(price) AS Avg_Mastercard_Sales FROM SALES 
+WHERE payment_type='Mastercard'
+AND country='United states'
+AND account_created LIKE '%09%';
+
+SELECT AVG(price) AS Avg_Amex_Sales FROM SALES 
+WHERE payment_type='Amex'
+AND country='United states'
+AND account_created LIKE '%09%';
+
+Avg_Visa_Sales
+1893.75
+Avg_Mastercard_Sales
+2353.846153846154
+Avg_Amex_Sales
+3375
+
+--The results show that in the year 2009 Amex had the higher priced sales on average in comparison to Visa and Mastercard.
+
+----What is the lowest priced item from the stores across the world?
+SELECT MIN(price) FROM sales;
+SELECT id, product FROM sales
+WHERE price=1200 LIMIT 5;
+
+MIN(price)
+1200
+
+ID	product
+1	Chair
+2	Chair
+3	Chair
+4	Chair
+6	Chair
+
+--The results show that the ‘Chair’ is the lowest priced item across all stores.
+
+----What is the highest priced item from the stores across the world?
+SELECT MAX(price) FROM sales;
+SELECT id, product FROM sales
+WHERE price=7500 LIMIT 5;
+
+MAX(price)
+7500
+
+ID	product
+32	Bed
+40	Bed
+55	Bed
+67	Bed
+
+--The results show that the ‘Bed’ is the highest priced item across all stores.
+
+--Who are the highest paying Amex customers with a spend of over the average sales price?
+SELECT AVG(price) FROM sales; 
+SELECT id, price AS amount_spent FROM sales
+GROUP BY id
+HAVING amount_spent>1740
+AND payment_type='Amex';
+
+ID	amount_spent
+40	7500
+41	3600
+49	3600
+
+----The results show that ID 40,41 and 49 were the highest spenders using an Amex card. 
+
+--What number of transactions were completed in North America compared to the ‘Rest of the World’?
+SELECT id, country,
+CASE
+WHEN country='United states' THEN 'North_America'
+WHEN country='Canada' THEN 'North_America'
+ELSE 'Rest_of_the_World'
+END as 'Continent'
+FROM sales;
+
+SELECT COUNT(*) AS Number_of_Transactions,  
+CASE
+WHEN country='United states' THEN 'North_America'
+WHEN country='Canada' THEN 'North_America'
+ELSE 'Rest_of_the_World'
+END as 'Continent'
+FROM sales
+GROUP BY Continent;
+
+Number_of_Transactions	Continent
+59	North_America
+41	Rest_of_the_World
+----The results show that 59 transactions were completed In North America and 41 transaction from the ‘Rest of the World’.
