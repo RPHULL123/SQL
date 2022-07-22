@@ -1,0 +1,90 @@
+The below is an analysis of Manchester United’s top scorers in the 2021-2022 season. 
+
+CREATE TABLE players (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT, last_name TEXT, age INTEGER);
+
+INSERT INTO players (first_name, last_name, age) VALUES ("Cristiano", "Ronaldo", 37);
+INSERT INTO players (first_name, last_name, age) VALUES ("Bruno", "Fernandes", 27);
+INSERT INTO players (first_name, last_name, age) VALUES ("Jadon", "Sancho", 22);
+INSERT INTO players (first_name, last_name, age) VALUES ("Marcus", "Rashford", 24);
+INSERT INTO players (first_name, last_name, age) VALUES ("_", "Fred", 29);
+INSERT INTO players (first_name, last_name, age) VALUES ("Anthony", "Elanga", 20);
+INSERT INTO players (first_name, last_name, age) VALUES ("Paul", "Pogba", 29);
+
+CREATE TABLE statistics (id INTEGER PRIMARY KEY AUTOINCREMENT, played INTEGER, goals INTEGER, total_shots INTEGER);
+
+INSERT INTO statistics (played, goals, total_shots) VALUES (38, 24, 108);
+INSERT INTO statistics (played, goals, total_shots) VALUES (46, 10, 70);
+INSERT INTO statistics (played, goals, total_shots) VALUES (38, 5, 24);
+INSERT INTO statistics (played, goals, total_shots) VALUES (32, 5, 27);
+INSERT INTO statistics (played, goals, total_shots) VALUES (36, 4, 16);
+INSERT INTO statistics (played, goals, total_shots) VALUES (27, 3, 22);
+INSERT INTO statistics (played, goals, total_shots) VALUES (27, 1, 24);
+SELECT * FROM players;
+SELECT * FROM statistics;
+
+Who scored the most goals on the team?
+
+SELECT p.first_name, p.Last_name, MAX(s.goals)
+FROM players p
+JOIN statistics s
+ON p.id=s.id;
+
+Result= Cristiano Ronaldo
+
+What was each player’s individual goal conversion?
+
+SELECT p.first_name, p.last_name, s.goals, s.total_shots,
+ROUND (cast (s.goals as float) / cast(s.total_shots as float), 2) AS goal_conv
+FROM players p
+JOIN statistics s
+ON p.id=s.id
+ORDER BY goal_conv DESC;
+
+first_name	last_name	goals	total_shots	goal_conv
+_	Fred	4	16	0.25
+Cristiano	Ronaldo	24	108	0.22
+Jadon	Sancho	5	24	0.21
+Marcus	Rashford	5	27	0.19
+Bruno	Fernandes	10	70	0.14
+Anthony	Elanga	3	22	0.14
+Paul	Pogba	1	24	0.04
+
+What was each player’s goal to game ratio?
+
+SELECT p.first_name, p.last_name, s.played, s.goals, ROUND (cast(s.goals as float) / cast(s.played as float),2) AS goal_to_game_ratio
+FROM players p
+JOIN statistics s
+ON p.id=s.id
+ORDER BY goal_to_game_ratio DESC;
+
+first_name	last_name	played	goals	goal_to_game_ratio
+Cristiano	Ronaldo	38	24	0.63
+Bruno	Fernandes	46	10	0.22
+Marcus	Rashford	32	5	0.16
+Jadon	Sancho	38	5	0.13
+_	Fred	36	4	0.11
+Anthony	Elanga	27	3	0.11
+Paul	Pogba	27	1	0.04
+
+Have over 28’s out performed the younger squad in regards to goals?
+
+SELECT SUM(s.goals) AS total_goals_over_28
+FROM players p
+JOIN statistics s
+ON p.id=s.id
+WHERE p.age >=28;
+
+total_goals_over_28
+29
+
+SELECT SUM(s.goals) AS total_goals_under_28
+FROM players p
+JOIN statistics s
+ON p.id=s.id
+WHERE p.age <28;
+
+total_goals_under_28
+23
+
+The results show that players are scoring more goals at a later stage in their career. However, this is largely due to Cristiano Ronaldo’s contribution of 24 goals.
+
