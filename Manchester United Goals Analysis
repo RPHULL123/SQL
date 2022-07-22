@@ -42,9 +42,9 @@ ORDER BY goal_conv DESC;
 
 first_name	last_name	goals	total_shots	goal_conv
 _	Fred	4	16	0.25
-Cristiano	Ronaldo	24	108	0.22
-Jadon	Sancho	5	24	0.21
-Marcus	Rashford	5	27	0.19
+Cristiano	       Ronaldo	24	108	0.22
+Jadon	           Sancho	5	24	0.21
+Marcus	         Rashford	5	27	0.19
 Bruno	Fernandes	10	70	0.14
 Anthony	Elanga	3	22	0.14
 Paul	Pogba	1	24	0.04
