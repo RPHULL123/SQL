@@ -40,15 +40,6 @@ JOIN statistics s
 ON p.id=s.id
 ORDER BY goal_conv DESC;
 
-first_name	last_name	goals	total_shots	goal_conv
-_	Fred	4	16	0.25
-Cristiano	Ronaldo	24	108	0.22
-Jadon	Sancho	5	24	0.21
-Marcus Rashford	5	27	0.19
-Bruno	Fernandes	10	70	0.14
-Anthony	Elanga	3	22	0.14
-Paul	Pogba	1	24	0.04
-
 What was each player’s goal to game ratio?
 
 SELECT p.first_name, p.last_name, s.played, s.goals, ROUND (cast(s.goals as float) / cast(s.played as float),2) AS goal_to_game_ratio
@@ -56,15 +47,6 @@ FROM players p
 JOIN statistics s
 ON p.id=s.id
 ORDER BY goal_to_game_ratio DESC;
-
-first_name	last_name	played	goals	goal_to_game_ratio
-Cristiano	Ronaldo	38	24	0.63
-Bruno	Fernandes	46	10	0.22
-Marcus	Rashford	32	5	0.16
-Jadon	Sancho	38	5	0.13
-_	Fred	36	4	0.11
-Anthony	Elanga	27	3	0.11
-Paul	Pogba	27	1	0.04
 
 Have over 28’s out performed the younger squad in regards to goals?
 
