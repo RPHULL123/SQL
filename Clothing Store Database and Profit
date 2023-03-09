@@ -1,4 +1,4 @@
---Create a grocery store database
+--Create a clothing store database
 
 CREATE TABLE dreams_clothing (id integer PRIMARY KEY, item text, location text, sex text, cost_price_unit£ integer, purchase_quantity integer, cost_total£ integer, quantity_sold integer, sale_price£ integer, total_sales£ integer);
 
